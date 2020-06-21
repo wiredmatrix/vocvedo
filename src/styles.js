@@ -43,9 +43,11 @@ export default StyleSheet.create({
         backgroundColor: "red",
         borderColor: "transparent",
     },
-    // galleryContainer: { 
-    //     bottom: 100 
-    // },
+    galleryContainer: { 
+        flex: 1,
+        width: winWidth,
+        height: winHeight
+    },
     galleryImageContainer: { 
         width: winWidth, 
         height: winHeight, 
@@ -86,5 +88,20 @@ export default StyleSheet.create({
         color: "white",
         fontWeight: "bold",
         textAlign: "center"
-      }
+      },
+      closeButton: {
+        display: 'flex',
+        height: 60,
+        borderRadius: 6,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#FF3974',
+        shadowColor: '#2AC062',
+        shadowOpacity: 0.5,
+        shadowOffset: { 
+          height: 10, 
+          width: 0 
+        },
+        shadowRadius: 25,
+      },
 });

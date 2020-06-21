@@ -3,7 +3,7 @@ import React from 'react';
 import { View, Text, Alert } from 'react-native';
 import * as Permissions from 'expo-permissions';
 import { Camera } from 'expo-camera';
-import * as firebase from 'firebase';
+import storage from "@react-native-firebase/storage";
 
 import styles from './styles';
 import Toolbar from './toolbar.component';
@@ -34,24 +34,25 @@ export default class CameraPage extends React.Component {
     handleShortCapture = async () => {
         const photoData = await this.camera.takePictureAsync();
         this.setState({ capturing: false, captures: [photoData, ...this.state.captures] })
-        // if (!photoData.cancelled) {
-        //     this.uploadImage(photoData.uri, imageName)
-        //     .then(() => {
-        //         Alert.alert("Success");
-        //     })
-        //     .catch((error) => {
-        //         Alert.alert('Error:', error.message);
-        //     });
-        // }
+        
+        if (!photoData.cancelled) {
+            this.uploadImage(photoData.uri, "test")
+            .then(() => {
+                alert (typeOfphotoData.uri);
+            })
+            .catch((error) => {
+                Alert.alert('Error:', error.message);
+            });
+        }
     };
 
-    // uploadImage = async (uri, imageName) => {
-    //     const response = await fetch(uri);
-    //     const blob = await response.blob();
+    uploadImage = async (uri, imageName) => {
+        const response = await fetch(uri);
+        const blob = await response.blob();
 
-    //     var ref = firebase.storage().ref().child("images/" + imageName);
-    //     return ref.put(blob)
-    // }
+        var ref = storage().ref().child("images/" + imageName);
+        return ref.put(blob)
+    }
 
 
     handleLongCapture = async () => {
